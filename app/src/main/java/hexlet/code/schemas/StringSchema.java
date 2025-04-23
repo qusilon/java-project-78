@@ -1,52 +1,35 @@
 package hexlet.code.schemas;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Predicate;
+
 public class StringSchema {
-    private boolean requiredLimitation = false;
-    private int minLengthLimitation = -1;
-    private String containsLimitation;
+
+    private Map<String, Predicate<String>> limitations = new HashMap<>();
 
     public StringSchema required() {
-        requiredLimitation = true;
+        limitations.put("required", content -> content == null || content.equals(""));
         return this;
     }
 
     public StringSchema minLength(int minLength) {
-        minLengthLimitation = minLength;
+        limitations.put("minLength", content -> content.length() < minLength);
         return this;
     }
 
     public StringSchema contains(String text) {
-        containsLimitation = text;
+        limitations.put("contains", content -> !content.contains(text));
         return this;
     }
 
 
     public boolean isValid(String content) {
-        if (isMinLengthOn()) {
-            if (content.length() < minLengthLimitation) {
-                return false;
-            }
-        }
-
-        if (requiredLimitation) {
-            if (content == null || content.equals("")) {
-                return false;
-            }
-        }
-
-        if (isContainsLimitation()) {
-            if (!content.contains(containsLimitation)) {
+        for (Predicate<String> limitation : limitations.values()) {
+            if (limitation.test(content)) {
                 return false;
             }
         }
         return true;
-    }
-
-    private boolean isMinLengthOn() {
-        return minLengthLimitation > -1;
-    }
-
-    private boolean isContainsLimitation() {
-        return containsLimitation != null;
     }
 }

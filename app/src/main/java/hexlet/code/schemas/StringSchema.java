@@ -1,12 +1,6 @@
 package hexlet.code.schemas;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Predicate;
-
-public class StringSchema {
-
-    private Map<String, Predicate<String>> limitations = new HashMap<>();
+public class StringSchema extends BaseSchema<String> {
 
     public StringSchema required() {
         limitations.put("required", content -> content == null || content.equals(""));
@@ -23,13 +17,4 @@ public class StringSchema {
         return this;
     }
 
-
-    public boolean isValid(String content) {
-        for (Predicate<String> limitation : limitations.values()) {
-            if (limitation.test(content)) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

@@ -1,15 +1,9 @@
 package hexlet.code.schemas;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Predicate;
-
-public class NumberSchema {
-
-    private Map<String, Predicate<Integer>> limitations = new HashMap<>();
+public class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema required() {
-        limitations.put("required", content -> content == null || content.equals(""));
+        limitations.put("required", content -> content == null);
         return this;
     }
 
@@ -23,15 +17,4 @@ public class NumberSchema {
         return this;
     }
 
-    public boolean isValid(Integer content) {
-        if (content == null && !limitations.containsKey("required")) {
-            return true;
-        }
-        for (Predicate<Integer> limitation : limitations.values()) {
-            if (limitation.test(content)) {
-                return false;
-            }
-        }
-        return true;
-    }
 }

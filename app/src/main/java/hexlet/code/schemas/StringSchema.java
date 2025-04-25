@@ -2,10 +2,10 @@ package hexlet.code.schemas;
 
 public class StringSchema extends BaseSchema<String> {
 
-    public StringSchema required() {
-        limitations.put("required", content -> content == null || content.equals(""));
-        return this;
-    }
+//    public StringSchema required() {
+//        limitations.put("required", content -> content == null || content.equals(""));
+//        return this;
+//    }
 
     public StringSchema minLength(int minLength) {
         limitations.put("minLength", content -> content.length() < minLength);

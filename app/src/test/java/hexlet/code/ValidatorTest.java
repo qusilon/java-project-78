@@ -11,10 +11,10 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ValidatorTest {
+class ValidatorTest {
 
     @Test
-    public void testStringValidator() {
+    void testStringValidator() {
         Validator v = new Validator();
         StringSchema schema = v.string();
 
@@ -39,7 +39,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testNumberValidator() {
+    void testNumberValidator() {
         var v = new Validator();
         NumberSchema schema = v.number();
 
@@ -63,7 +63,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testMapValidator() {
+    void testMapValidator() {
         var v = new Validator();
         var schema = v.map();
 
@@ -89,7 +89,7 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testMapShapeValidator() {
+    void testMapShapeValidator() {
         var v = new Validator();
         var schema = v.map();
         Map<String, BaseSchema<String>> schemas = new HashMap<>();

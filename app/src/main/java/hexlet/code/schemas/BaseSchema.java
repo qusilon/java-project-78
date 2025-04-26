@@ -8,11 +8,6 @@ public abstract class BaseSchema<T> {
 
     protected Map<String, Predicate<T>> limitations = new HashMap<>();
 
-    public BaseSchema<T> required() {
-        limitations.put("required", content -> content == null || content.equals(""));
-        return this;
-    }
-
     public boolean isValid(T content) {
         if (content == null && !limitations.containsKey("required")) {
             return true;
